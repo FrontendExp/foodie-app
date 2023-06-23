@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Header from './Header'
+import Dash from './Dashboard'
+import Login from './Login';
 
 function App() {
+  const [user, setUser] = useState(false)
+
+  setInterval(() =>{
+     if(localStorage.getItem('profile')){
+      setUser(true)
+     }else{
+      setUser(false)
+     }
+  },300)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      {user ? 
+      <Dash /> :
+      <Login />
+}
     </div>
   );
 }
